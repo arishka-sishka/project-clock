@@ -31,6 +31,6 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.label_text.setText(_translate("Form", "TextLabel"))
-        self.checkBox.setText(_translate("Form", "CheckBox"))
-        self.label_alarm.setText(_translate("Form", "TextLabel"))
+        self.label_text.setText(_translate("Form", "(для записей)"))
+        self.checkBox.setText(_translate("Form", "вкл/выкл"))
+        self.label_alarm.setText(_translate("Form", "время"))
