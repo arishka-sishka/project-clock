@@ -19,27 +19,25 @@ class Clock(QWidget):
 
     def initUI(self):
         self.setGeometry(300, 300, 400, 400)
-        self.setWindowTitle('Рисование')
+        self.setWindowTitle('Часики')
 
     def paintEvent(self, event):
         time = datetime.datetime.utcnow() + self.offset
         qp = QPainter()
         self.draw_cifer(qp, QColor(0, 0, 0))
-        self.draw_second(qp, time.second, QColor(255, 0, 0))
-        self.draw_minute(qp, time.minute, QColor(0, 255, 0))
-        self.draw_hour(qp, time.hour, QColor(0, 0, 255))
-
+        self.draw_second(qp, time.second, QColor(240, 0, 0))
+        self.draw_minute(qp, time.minute, QColor(0, 200, 0))
+        self.draw_hour(qp, time.hour, QColor(0, 0, 230))
 
     def draw_cifer(self, qp, color):
         qp.begin(self)
         qp.translate(self.width() / 2, self.height() / 2)
-        qp.setPen(QPen(color, 3))
+        qp.setPen(QPen(color, 2))
         qp.setFont(QFont("Helvetica", pointSize=20))
-        qp.drawText(QPoint(-12, -120), "12")
-        qp.drawText(QPoint(120, 6), "3")
-        qp.drawText(QPoint(-134, 6), "9")
-        qp.drawText(QPoint(-6, 140), "6")
-
+        qp.drawText(QPoint(-12, -120), "𝟙𝟚")
+        qp.drawText(QPoint(120, 6), "𝟛")
+        qp.drawText(QPoint(-134, 6), "𝟡")
+        qp.drawText(QPoint(-6, 140), "𝟞")
 
         for i in range(12):
             qp.drawLine(QPoint(0, -100), QPoint(0, -110))
@@ -49,6 +47,7 @@ class Clock(QWidget):
     def draw_second(self, qp, seconds, color):
         qp.begin(self)
         qp.translate(self.width() / 2, self.height() / 2)
+        # qp.setPen(QPen(color, 1))
         qp.setBrush(color)
         qp.rotate(6 * seconds)
         qp.drawConvexPolygon(QPolygon([
@@ -61,6 +60,7 @@ class Clock(QWidget):
     def draw_minute(self, qp, minutes, color):
         qp.begin(self)
         qp.translate(self.width() / 2, self.height() / 2)
+        # qp.setPen(QPen(color, 1))
         qp.setBrush(color)
         qp.rotate(6 * minutes)
         qp.drawConvexPolygon(QPolygon([
@@ -73,6 +73,7 @@ class Clock(QWidget):
     def draw_hour(self, qp, hours, color):
         qp.begin(self)
         qp.translate(self.width() / 2, self.height() / 2)
+        # qp.setPen(QPen(color, 1))
         qp.setBrush(color)
         qp.rotate(30 * hours)
         qp.drawConvexPolygon(QPolygon([
@@ -85,6 +86,6 @@ class Clock(QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = Clock(3)
+    ex = Clock(7)
     ex.show()
     sys.exit(app.exec())
