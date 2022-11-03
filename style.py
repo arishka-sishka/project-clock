@@ -10,8 +10,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from components.Clock.Clock import Clock
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -21,7 +19,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setStyleSheet("background: #E9E9E9;")
         self.centralwidget.setObjectName("centralwidget")
-        self.clock_widget = Clock(self.centralwidget)
+        self.clock_widget = QtWidgets.QWidget(self.centralwidget)
         self.clock_widget.setGeometry(QtCore.QRect(560, 240, 400, 400))
         self.clock_widget.setObjectName("clock_widget")
         self.frame = QtWidgets.QFrame(self.centralwidget)
