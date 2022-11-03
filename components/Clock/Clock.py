@@ -1,14 +1,14 @@
 import sys
 import datetime
 from PyQt5.QtCore import QPoint, QTimer
-from PyQt5.QtGui import QPainter, QColor, QPolygon, QPen, QStaticText, QFont
+from PyQt5.QtGui import QPainter, QColor, QPolygon, QPen, QFont
 from PyQt5.QtWidgets import QWidget, QApplication
 
 
 class Clock(QWidget):
-    def __init__(self, offset):
-        super().__init__()
-        self.offset = datetime.timedelta(hours=offset)
+    def __init__(self, parent):
+        super().__init__(parent=parent)
+        self.offset = datetime.timedelta(hours=0)
         self.initUI()
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update)
@@ -86,6 +86,6 @@ class Clock(QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = Clock(7)
+    ex = Clock(None)
     ex.show()
     sys.exit(app.exec())
