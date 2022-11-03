@@ -21,9 +21,10 @@ class Alarm(QWidget, Ui_Form):
         }   
         """)
 
-    def on_alarm(self):
-        self.label_signature_alarm
-        pass
+    def check_alarm(self, time):
+        alarm_time = self.timeEdit.time().toPyTime()
+        if alarm_time.second == time.second and alarm_time.minute == time.minute and alarm_time.hour == time.hour and self.checkBox.isChecked():
+            print("work")
 
 
 if __name__ == '__main__':

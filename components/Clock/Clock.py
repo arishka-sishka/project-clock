@@ -10,12 +10,8 @@ class Clock(QWidget):
         super().__init__(parent=parent)
         self.offset = datetime.timedelta(hours=0)
         self.initUI()
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.update)
-        self.timer.start(1000)
+        self.time = datetime.datetime.utcnow()
 
-    def set_offset(self, offset):
-        self.offset = datetime.timedelta(hours=offset)
 
     def initUI(self):
         self.setGeometry(300, 300, 400, 400)
