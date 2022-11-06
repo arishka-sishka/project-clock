@@ -26,6 +26,10 @@ class Alarm(QWidget, Ui_Form):
         if alarm_time.second == time.second and alarm_time.minute == time.minute and alarm_time.hour == time.hour and self.checkBox.isChecked():
             print("work")
 
+            self.Ui_Dialog()
+            self.Ui_Dialog.setWindowTitle("Будильник!")
+            self.Ui_Dialog.exec()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
