@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import QWidget, QApplication
 
 from components.Alarm.style import Ui_Form
+from components.AlarmDialog.Dialog import Dialog
 
 
 class Alarm(QWidget, Ui_Form):
@@ -24,11 +25,10 @@ class Alarm(QWidget, Ui_Form):
     def check_alarm(self, time):
         alarm_time = self.timeEdit.time().toPyTime()
         if alarm_time.second == time.second and alarm_time.minute == time.minute and alarm_time.hour == time.hour and self.checkBox.isChecked():
-            print("work")
+            dialog = Dialog(self.lineEdit.text(), self.timeEdit.time().toPyTime().strftime("%H:%M"), "components/sound/base.mp3")
+            dialog.exec()
 
-            self.Ui_Dialog()
-            self.Ui_Dialog.setWindowTitle("Будильник!")
-            self.Ui_Dialog.exec()
+
 
 
 if __name__ == '__main__':

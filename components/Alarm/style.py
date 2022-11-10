@@ -39,3 +39,5 @@ class Ui_Form(object):
         self.lineEdit.setText(_translate("Form", "(для записей)"))
         self.timeEdit.setDisplayFormat(_translate("Form", "hh:mm"))
         self.checkBox.setText(_translate("Form", "вкл/выкл"))
+
+

@@ -20,7 +20,7 @@ class App(QMainWindow, style.Ui_MainWindow):
         self.spinBox.valueChanged.connect(self.onChange)
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.onTime)
-        self.timer.start(1000)
+        self.timer.start(500)
 
     def onChange(self):
         self.clock_widget.offset = timedelta(hours=self.spinBox.value())
