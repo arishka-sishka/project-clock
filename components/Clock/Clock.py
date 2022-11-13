@@ -1,6 +1,6 @@
 import sys
 import datetime
-from PyQt5.QtCore import QPoint, QTimer
+from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QPainter, QColor, QPolygon, QPen, QFont
 from PyQt5.QtWidgets import QWidget, QApplication
 
@@ -11,7 +11,6 @@ class Clock(QWidget):
         self.offset = datetime.timedelta(hours=0)
         self.initUI()
         self.time = datetime.datetime.utcnow()
-
 
     def initUI(self):
         self.setGeometry(300, 300, 400, 400)
@@ -43,7 +42,6 @@ class Clock(QWidget):
     def draw_second(self, qp, seconds, color):
         qp.begin(self)
         qp.translate(self.width() / 2, self.height() / 2)
-        # qp.setPen(QPen(color, 1))
         qp.setBrush(color)
         qp.rotate(6 * seconds)
         qp.drawConvexPolygon(QPolygon([
@@ -56,7 +54,6 @@ class Clock(QWidget):
     def draw_minute(self, qp, minutes, color):
         qp.begin(self)
         qp.translate(self.width() / 2, self.height() / 2)
-        # qp.setPen(QPen(color, 1))
         qp.setBrush(color)
         qp.rotate(6 * minutes)
         qp.drawConvexPolygon(QPolygon([
@@ -69,7 +66,6 @@ class Clock(QWidget):
     def draw_hour(self, qp, hours, color):
         qp.begin(self)
         qp.translate(self.width() / 2, self.height() / 2)
-        # qp.setPen(QPen(color, 1))
         qp.setBrush(color)
         qp.rotate(30 * hours)
         qp.drawConvexPolygon(QPolygon([

@@ -21,7 +21,8 @@ class App(QMainWindow, style.Ui_MainWindow):
         for count, data in enumerate(cur.execute("select * from alarms").fetchall()):
             id, title, time, state, sound = data
             time = datetime.strptime(time, "%H:%M:%S").time()
-            self.alarms[count].setData(id, "Проверка" if title else "", time, bool(state), sound if sound else "base.mp3")
+            self.alarms[count].setData(id, "Проверка" if title else "", time, bool(state),
+                                       sound if sound else "base.mp3")
         con.close()
         for alarm in self.alarms:
             self.alarms_layout.addWidget(alarm)

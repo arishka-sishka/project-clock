@@ -45,16 +45,14 @@ class Alarm(QWidget, Ui_Form):
         con = sqlite3.connect("base.db")
         cur = con.cursor()
         cur.execute("""update alarms set title = ?, time = ?, state = ?, sound = ? where id = ?""",
-                    (self.lineEdit.text(), self.timeEdit.time().toPyTime().strftime("%H:%M:%S"), self.checkBox.isChecked(), self.sound, self.id))
+                    (self.lineEdit.text(), self.timeEdit.time().toPyTime().strftime("%H:%M:%S"),
+                     self.checkBox.isChecked(), self.sound, self.id))
         con.commit()
         con.close()
 
     def changeSound(self):
         self.sound = QFileDialog.getOpenFileName(self, "Выбрать звук", '', filter="*.mp3")[0]
         self.updateDatabase()
-
-
-
 
 
 if __name__ == '__main__':
