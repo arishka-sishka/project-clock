@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 from components.Clock.Clock import Clock
 
-
+# Шаблон MainWindow
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -43,4 +43,4 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Будильник"))

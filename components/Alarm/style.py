@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
+# Шаблон установки будильника
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")

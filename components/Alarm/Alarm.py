@@ -6,10 +6,12 @@ from components.Alarm.style import Ui_Form
 from components.AlarmDialog.Dialog import Dialog
 
 
+# Виджеты для установки будильника
 class Alarm(QWidget, Ui_Form):
     def __init__(self, parent):
         super().__init__(parent=parent)
         self.setupUi(self)
+        # Стили
         self.setStyleSheet("""
         QFrame{
             background: white;
@@ -27,6 +29,7 @@ class Alarm(QWidget, Ui_Form):
         self.checkBox.stateChanged.connect(self.updateDatabase)
         self.soundBtn.clicked.connect(self.changeSound)
 
+# Сравнение времени с компьютера с заданным временем
     def check_alarm(self, time):
         alarm_time = self.timeEdit.time().toPyTime()
         if alarm_time.second == time.second and alarm_time.minute == time.minute and alarm_time.hour == time.hour and self.checkBox.isChecked():

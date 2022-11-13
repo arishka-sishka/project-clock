@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QDialog
 from components.AlarmDialog.style import Ui_Dialog
 
 
+# Диалоговое окно будильника
 class Dialog(QDialog, Ui_Dialog):
     def __init__(self, title, time, filename, parent=None):
         self.parent = parent
@@ -15,7 +16,6 @@ class Dialog(QDialog, Ui_Dialog):
         self.sound = QMediaPlayer()
         self.sound.setMedia(QMediaContent(QUrl.fromLocalFile(filename)))
         self.sound.play()
-
 
 # if __name__ == "__main__":
 #     import sys
