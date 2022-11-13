@@ -1,10 +1,11 @@
+import sqlite3
 import sys
 from datetime import datetime, timedelta
 
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
-from components.Alarm import Alarm
+from components.Alarm.Alarm import Alarm
 import style
 
 
@@ -12,9 +13,16 @@ class App(QMainWindow, style.Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.alarms = [Alarm.Alarm(self.centralwidget), Alarm.Alarm(self.centralwidget),
-                       Alarm.Alarm(self.centralwidget), Alarm.Alarm(self.centralwidget),
-                       Alarm.Alarm(self.centralwidget)]
+        self.alarms = [Alarm(self.centralwidget), Alarm(self.centralwidget),
+                       Alarm(self.centralwidget), Alarm(self.centralwidget),
+                       Alarm(self.centralwidget)]
+        con = sqlite3.connect("base.db")
+        cur = con.cursor()
+        for count, data in enumerate(cur.execute("select * from alarms").fetchall()):
+            id, title, time, state, sound = data
+            time = datetime.strptime(time, "%H:%M:%S").time()
+            self.alarms[count].setData(id, "Проверка" if title else "", time, bool(state), sound if sound else "base.mp3")
+        con.close()
         for alarm in self.alarms:
             self.alarms_layout.addWidget(alarm)
         self.spinBox.valueChanged.connect(self.onChange)
