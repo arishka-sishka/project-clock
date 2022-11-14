@@ -17,6 +17,10 @@ class Ui_Form(object):
         # Создать кнопку изменения звука с размерами 30x30px и положением (295, 20)
         self.soundBtn = QtWidgets.QPushButton(self.frame)
         self.soundBtn.setGeometry(QtCore.QRect(295, 20, 30, 30))
+        # Установить иконку
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("bell.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.soundBtn.setIcon(icon)
         # Создать строку информации будильника с размерами 250x30px и положением (20, 20)
         self.lineEdit = QtWidgets.QLineEdit(self.frame)
         self.lineEdit.setGeometry(QtCore.QRect(20, 20, 250, 30))
