@@ -29,7 +29,14 @@ class Ui_MainWindow(object):
         self.verticalLayoutWidget = QtWidgets.QWidget(self.frame)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 351, 681))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        #
+        # Создать кнопку сброса
+        self.reset_btn = QtWidgets.QPushButton(MainWindow)
+        self.reset_btn.setGeometry(QtCore.QRect(720, 730, 100, 40))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        self.reset_btn.setFont(font)
+        self.reset_btn.setObjectName("btn_ok")
+        # Вертикальная направляющая внутри контейнера
         self.alarms_layout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.alarms_layout.setContentsMargins(0, 0, 0, 0)
         self.alarms_layout.setSpacing(20)
@@ -56,3 +63,4 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Будильник"))
+        self.reset_btn.setText(_translate("MainWindow", "сброс"))
