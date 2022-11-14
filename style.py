@@ -51,7 +51,8 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.spinBox.setFont(font)
         self.spinBox.setAlignment(QtCore.Qt.AlignCenter)
-        # Устанивить максимальное значение 12
+        # Установить значение +-12
+        self.spinBox.setMinimum(-12)
         self.spinBox.setMaximum(12)
         self.spinBox.setObjectName("spinBox")
         MainWindow.setCentralWidget(self.centralwidget)
