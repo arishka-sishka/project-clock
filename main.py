@@ -1,10 +1,11 @@
-# База данных
-import datetime
-import sqlite3
+import sys
 
-con = sqlite3.connect("base.db")
-cur = con.cursor()
+from PyQt5.QtWidgets import QApplication
 
-cur.execute('insert into alarms(id, time, state) values(?, ?, ?)',
-            (1, datetime.time(hour=0), False))
-con.commit()
+from App import App
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = App()
+    ex.show()
+    sys.exit(app.exec())

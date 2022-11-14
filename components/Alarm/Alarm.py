@@ -1,14 +1,18 @@
+import datetime
 import sqlite3
-import sys
-from PyQt5.QtWidgets import QWidget, QApplication, QFileDialog
+
+from PyQt5.QtWidgets import QWidget, QFileDialog
 
 from components.Alarm.style import Ui_Form
 from components.AlarmDialog.Dialog import Dialog
 
 
-# Виджеты для установки будильника
+# Виджет будильника
 class Alarm(QWidget, Ui_Form):
-    def __init__(self, parent):
+    # Инициализация
+    def __init__(self, parent: QWidget):
+        self.sound = None
+        self.id = None
         super().__init__(parent=parent)
         self.setupUi(self)
         # Стили
@@ -24,27 +28,35 @@ class Alarm(QWidget, Ui_Form):
             border-radius: 8px;
         }   
         """)
-        self.lineEdit.textChanged.connect(self.updateDatabase)
-        self.timeEdit.timeChanged.connect(self.updateDatabase)
-        self.checkBox.stateChanged.connect(self.updateDatabase)
-        self.soundBtn.clicked.connect(self.changeSound)
+        # Назначение действий на события
+        self.lineEdit.textChanged.connect(self.update_database)
+        self.timeEdit.timeChanged.connect(self.update_database)
+        self.checkBox.stateChanged.connect(self.update_database)
+        self.soundBtn.clicked.connect(self.change_sound)
 
-# Сравнение времени с компьютера с заданным временем
-    def check_alarm(self, time):
+    # Срабатывание будильника
+    def check_alarm(self, time: datetime.datetime) -> None:
+        # Получение времени будильника в формате date.time
         alarm_time = self.timeEdit.time().toPyTime()
-        if alarm_time.second == time.second and alarm_time.minute == time.minute and alarm_time.hour == time.hour and self.checkBox.isChecked():
+        # Сравнение времени часов с временем данного будильника
+        if alarm_time.second == time.second and alarm_time.minute == time.minute \
+                and alarm_time.hour == time.hour and self.checkBox.isChecked():
+            # Создание и отображение диалогового окна
             dialog = Dialog(self.lineEdit.text(), self.timeEdit.time().toPyTime().strftime("%H:%M"), self.sound)
             dialog.exec()
 
-    def setData(self, id, title, time, state, sound="components/sound/base.mp3"):
+    # Установить данные будильника
+    def set_data(self, alarm_id: int, title: str, time: datetime.time, state: bool,
+                 sound: str = "components/sound/base.mp3") -> None:
         self.sound = sound
-        self.id = id
+        self.id = alarm_id
         self.lineEdit.setText(title)
         self.timeEdit.setTime(time)
         self.checkBox.setCheckState(state)
-        self.updateDatabase()
+        self.update_database()
 
-    def updateDatabase(self):
+    # Обновить данные в бд в соответсвии с данными будильника
+    def update_database(self) -> None:
         con = sqlite3.connect("base.db")
         cur = con.cursor()
         cur.execute("""update alarms set title = ?, time = ?, state = ?, sound = ? where id = ?""",
@@ -53,13 +65,7 @@ class Alarm(QWidget, Ui_Form):
         con.commit()
         con.close()
 
-    def changeSound(self):
+    # Изменение звука будильника
+    def change_sound(self) -> None:
         self.sound = QFileDialog.getOpenFileName(self, "Выбрать звук", '', filter="*.mp3")[0]
-        self.updateDatabase()
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = Alarm(None)
-    ex.show()
-    sys.exit(app.exec())
+        self.update_database()
