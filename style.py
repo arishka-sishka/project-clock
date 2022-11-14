@@ -41,7 +41,7 @@ class Ui_MainWindow(object):
         self.alarms_layout.setContentsMargins(0, 0, 0, 0)
         self.alarms_layout.setSpacing(20)
         self.alarms_layout.setObjectName("alarms_layout")
-        # Создать  с размерами 80x40px и положением (720, 180)
+        # Создать спин-бокс с размерами 80x40px и положением (720, 180)
         self.spinBox = QtWidgets.QSpinBox(self.centralwidget)
         self.spinBox.setGeometry(QtCore.QRect(720, 180, 80, 40))
         # Установить шрифт размером 20px
